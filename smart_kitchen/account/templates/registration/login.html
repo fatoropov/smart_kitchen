@@ -28,4 +28,18 @@
       </a>
     </p>
   </div>
+  <div class="social">
+    <ul>
+      <li class="vk">
+        <a href="{% url 'social:begin' 'vk-oauth2' %}">
+          Sign in with VK
+        </a>
+      </li>
+      <li class="google">
+        <a href="{% url "social:begin" "google-oauth2" %}">
+        Sign in with Google
+        </a>
+        </li>
+    </ul>
+  </div>
 {% endblock %}
