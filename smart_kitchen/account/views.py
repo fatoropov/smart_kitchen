@@ -32,10 +32,9 @@ def user_login(request):
 
 
 @login_required
-def dashboard(request):
+def mypage(request):
     return render(request,
-                  'account/dashboard.html',
-                  {'section': 'dashboard'})
+                  'account/mypage.html')
 
 
 def register(request):

@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 
 {% block title %}Log-in{% endblock %}
+{% block page_header %}  <h1>Log-in</h1> {% endblock %}
 
 {% block content %}
-  <h1>Log-in</h1>
+
+
   {% if form.errors %}
     <p>
       Your username and password didn't match.
@@ -12,7 +14,7 @@
   {% else %}
     <p>
       Please, use the following form to log-in.
-      If you don't have an account <a href="{% url "register" %}">register here</a>.
+      If you don't have an account <a href="{% url 'register' %}">register here</a>.
     </p>
   {% endif %}
   <div class="login-form">
@@ -23,7 +25,7 @@
       <p><input type="submit" value="Log-in"></p>
     </form>
     <p>
-      <a href="{% url "password_reset" %}">
+      <a href="{% url 'password_reset' %}">
         Forgotten your password?
       </a>
     </p>
@@ -36,10 +38,11 @@
         </a>
       </li>
       <li class="google">
-        <a href="{% url "social:begin" "google-oauth2" %}">
+        <a href="{% url 'social:begin' 'google-oauth2' %}">
         Sign in with Google
         </a>
         </li>
     </ul>
   </div>
+
 {% endblock %}
