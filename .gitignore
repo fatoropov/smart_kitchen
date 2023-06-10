@@ -2,3 +2,7 @@ smart_kitchen/.env
 smart_kitchen/cert.crt
 smart_kitchen/cert.key
 smart_kitchen_venv
+*.pyc
+.venv
+*.docx
+*.pdf
