@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'products.apps.ProductsConfig',
     'dinnerware.apps.DinnerwareConfig',
     'cooking.apps.CookingConfig',
+    'cart.apps.CartConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -71,6 +72,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.cart',
             ],
         },
     },
@@ -178,6 +180,9 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 ABSOLUTE_URL_OVERRIDES = {
-    'auth.user': lambda u: reverse_lazy('user_detail',
+    'auth.user': lambda u: reverse_lazy('account:user_detail',
                                         args=[u.username])
 }
+
+# Создать корзину в сессии
+CART_SESSION_ID = 'cart'

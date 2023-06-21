@@ -23,7 +23,6 @@ h1, h2, h3, h4, h5 , h6 { font-family: 'Muli', sans-serif; font-weight:normal; }
 
 h1 {
     border-bottom:1px solid #bbb;
-    padding:0 0 10px 0;
     margin:10px 0 20px 0;
 }
 
@@ -80,61 +79,10 @@ ol {
     padding-top:4px;
 }
 
-#content {
-    padding:30px 100px;
-}
-
-/* forms
-form {
-    overflow:auto;
-}
-
-form p {
-    width:100%;
-    overflow:auto;
-}
-
-label {
-    float:left;
-    clear:both;
-    color:#333;
-    margin-bottom:4px;
-}
-input, textarea {
-    clear:both;
-    float:left;
-    margin:0 0 10px;
-    background:#efefef;
-    border:0;
-    padding:6px 10px;
-    font-size:14px;
-}
-input[type=submit], a.button {
-    font-weight:bold;
-    background:#12c064;
-    color:#fff;
-    padding:10px 20px;
-    font-size:14px;
-    text-transform:uppercase;
-}
-.errorlist {
-    color:#cc0033;
-    float:left;
-    clear:both;
-    padding-left:10px;
-}
-.helptext {
-    margin:0 0 20px 0;
-    color:#aaa;
-    clear:both;
-    float:left;
-    font-size:13px;
-} */
 
 
 /* messages */
 ul.messages {
-    margin:10px 100px;
     padding:0;
     list-style-type:
     none;

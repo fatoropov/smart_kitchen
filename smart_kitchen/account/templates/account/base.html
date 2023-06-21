@@ -105,69 +105,68 @@
 
     <main class="d-flex flex-nowrap pg-5">
       {% block sidebar %}
-      <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
-        <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary min-vh-100">
-          <a href="/" class="d-flex align-items-center mb-3 mb-md-1 link-body-emphasis text-decoration-none">
+        <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary">
+          <a href="/" class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none">
             <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-            <span class="fs-5 d-none d-sm-inline">Sidebar</span>
+            <span class="fs-5 d-none d-md-inline">Smart Kitchen</span>
           </a>
-          <hr>
           <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
-              <a href="#" class="nav-link active" aria-current="page">
-                <svg class="fs-4 bi pe-none me-2" width="24" height="24"><use xlink:href="#home"/></svg>
-                <text class="ms-1 d-none d-sm-inline">Home</text>
+              <a href="{% url 'account:user_detail' request.user.username %}" class="nav-link active" aria-current="page">
+                <svg class="fs-4 bi pe-none" width="24" height="24"><use xlink:href="#home"/></svg>
+                <text class="ms-1 d-none d-md-inline">Моя страница</text>
               </a>
             </li>
-            <li>
+            <li class="nav-item">
               <a href="#" class="nav-link link-body-emphasis">
-                <svg class="fs-4 bi pe-none me-2" width="24" height="24"><use xlink:href="#speedometer2"/></svg>
-                <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+                <svg class="fs-4 bi pe-none" width="24" height="24"><use xlink:href="#speedometer2"/></svg>
+                <span class="ms-1 d-none d-md-inline">Общежития</span>
               </a>
             </li>
-            <li>
-              <a href="#" class="nav-link link-body-emphasis">
-                <svg class="fs-4 bi pe-none me-2" width="24" height="24"><use xlink:href="#table"/></svg>
-                <span class="ms-1 d-none d-sm-inline">Orders</span>
+            <li class="nav-item">
+              <a href="{% url 'account:user_list' %}" class="nav-link link-body-emphasis">
+                <svg class="fs-4 bi pe-none" width="24" height="24"><use xlink:href="#table"/></svg>
+                <span class="ms-1 d-none d-md-inline">Друзья</span>
               </a>
             </li>
-            <li>
-              <a href="#" class="nav-link link-body-emphasis">
-                <svg class="fs-4 bi pe-none me-2" width="24" height="24"><use xlink:href="#grid"/></svg>
-                <span class="ms-1 d-none d-sm-inline">Products</span>
+            <li class="nav-item">
+              <a href="{% url 'cooking:menu' %}" class="nav-link link-body-emphasis">
+                <svg class="fs-4 bi pe-none" width="24" height="24"><use xlink:href="#grid"/></svg>
+                <span class="ms-1 d-none d-md-inline">Приготовить</span>
               </a>
             </li>
-            <li>
-              <a href="#" class="nav-link link-body-emphasis">
-                <svg class="fs-4 bi pe-none me-2" width="24" height="24"><use xlink:href="#people-circle"/></svg>
-                <span class="ms-1 d-none d-sm-inline">Customers</span>
+            <li class="nav-item">
+              <a href="{% url 'products:product_list' %}" class="nav-link link-body-emphasis">
+                <svg class="fs-4 bi pe-none" width="24" height="24"><use xlink:href="#people-circle"/></svg>
+                <span class="ms-1 d-none d-md-inline">Заказать продукты</span>
               </a>
             </li>
           </ul>
           {% if user.is_authenticated %}
             <hr>
             <div class="dropdown mb-3">
-              <a href="{% url 'user_detail' request.user.username %}" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle d-sm-inline-dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="{% thumbnail request.user.profile.photo 50x0 %}" alt="Изображение профиля" class="fs-4 rounded-circle me-2">
-                <span class="d-none d-sm-inline">{{ request.user.get_full_name }}</span>
+              <a href="{% url 'account:user_detail' request.user.username %}" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle d-md-inline-dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="{% thumbnail request.user.profile.photo 50x0 %}" alt="Изображение профиля" class="fs-4 rounded-circle">
+                <span class="ms-1 d-none d-md-inline">{{ request.user.get_full_name }}</span>
               </a>
               <ul class="dropdown-menu text-small shadow">
-                <li><a class="dropdown-item" href="{% url 'user_detail' request.user.username %}">Моя страница</a></li>
-                <li><a class="dropdown-item" href="{% url 'edit' %}">Настройки</a></li>
+                <li><a class="dropdown-item" href="{% url 'account:user_detail' request.user.username %}">Моя страница</a></li>
+                <li><a class="dropdown-item" href="{% url 'account:edit' %}">Настройки</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="{% url 'logout' %}">Выйти</a></li>
+                <li><a class="dropdown-item" href="{% url 'account:logout' %}">Выйти</a></li>
               </ul>
             </div>
           {% endif %}
         </div>
-      </div>
+
 
       {% endblock %}
-
-      <div class="container pb-2 mb-2 border-bottom">
-        {% block page_header %}{% endblock page_header %}
-        {% block content %}{% endblock content %}
-      </div>>
+      <div class="row flex-grow-1 overflow-auto">
+        <div class="container pb-2 mb-2">
+          {% block page_header %}{% endblock page_header %}
+          {% block content %}{% endblock content %}
+        </div>
+      </div>
     </main>
 
     <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
