@@ -1,0 +1,93 @@
+{% extends "account/base.html" %}
+{% load static %}
+
+{% block page_header %}
+  <div class="text-center"><h1 class="display-3">Корзина <span class="badge badge-secondary badge-pill">{{ cart.len }}</span></h1></div>
+{% endblock %}
+
+{% block content %}
+  {% if cart %}
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 g-3">
+
+      {% for item in cart %}
+        {% with product=item.product %}
+          <div class="col-12 col-sm-12 col-md-6">
+            <div class="card mb-3">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-3 col-sm-5">
+                      <a href="{{ product.get_absolute_url }}">
+                          <img class="card-img-top w-30 h-40"
+                              src="{% if product.image %}{{ product.image.url }}
+                                    {% else %}{% static 'img/no_image.png' %}{% endif %}"
+                              alt="">
+                      </a>
+                    </div>
+                    <div class="col-md-9 col-sm-7">
+                      <a href="{{ product.get_absolute_url }}"><h5
+                              class="card-title">{{ product.name }}</h5></a>
+
+                      <p class="card-text">{{ product.description }}</p>
+                    </div>
+                  </div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item bg-light">
+                        <div class="row text-center">
+                            <div class="col-sm-4 col-md-2">
+                                <a href="{% url 'cart:cart_update_plus' product.id %}"
+                                  class="btn btn-outline-dark btn-sm">&plus;</a>
+                                {{ item.quantity }}
+                                <a href="{% url 'cart:cart_update_minus' product.id %}"
+                                  class="btn btn-outline-dark btn-sm">&minus;</a>
+                            </div>
+                            <div class="col-sm-4 col-md-8">Цена за штуку: {{ item.price }} руб.</div>
+                            <div class="col-sm-4 col-md-2">
+
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+          </div>
+        {% endwith %}
+      {% endfor %}
+    </div>
+    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2" >
+      <div class="col-sm-4 col-md-8"></div>
+      <div class="col-sm-4 col-md-2">
+        <h4  class="float-right">Итого:</h4 >
+      </div>
+      <div class="col-sm-4 col-md-2">
+        <h4 class="float-right">{{ cart.get_total_price}} руб.</h4>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-sm-3 col-md-7"></div>
+      <div class="col-sm-4 col-md-2">
+        <a class="btn btn-danger btn-lg float-right" href="{% url 'cart:cart_clear' %}">
+          Очистить корзину
+        </a>
+        {% if user.is_authenticated %}
+          </div>
+          <div class="col-sm-1 col-md-1"></div>
+
+        {% else %}
+          </div>
+          <div class="col-sm-1 col-md-1"></div>
+          <div class="col-sm-4 col-md-2">
+            <a class="btn btn-success btn-lg float-right" href="{% url 'account:login' %}">
+                Перейти к заказу
+            </a>
+          </div>
+        {% endif %}
+    </div>
+  </div>
+  {% else %}
+    <h4 class="mt-3 mb-3 text-center">
+        Корзина пуста
+    </h4>
+  {% endif %}
+{% endblock %}

@@ -5,16 +5,18 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    path('admin/',
-         admin.site.urls),
-    path('account/',
-         include('account.urls')),
-    path('products/',
-         include('products.urls', namespace='products')),
-    path('cooking/',
-         include('cooking.urls')),
-    path('social-auth/',
-         include('social_django.urls', namespace='social')),
+     path('admin/',
+          admin.site.urls),
+     path('account/',
+          include('account.urls', namespace='account')),
+     path('cart/',
+          include('cart.urls', namespace='cart')),
+     path('products/',
+          include('products.urls', namespace='products')),
+     path('cooking/',
+          include('cooking.urls')),
+     path('social-auth/',
+          include('social_django.urls', namespace='social')),
 ]
 
 if settings.DEBUG:
