@@ -1,6 +1,11 @@
 from django.contrib import admin
 
-from .models import Category, Dish, Menu
+from .models import Category, Dish, DishComposition, Menu
+
+
+class DishCompositionInline(admin.TabularInline):
+    model = DishComposition
+    raw_id_fields = ["product"]
 
 
 @admin.register(Menu)
@@ -30,20 +35,14 @@ class DishAdmin(admin.ModelAdmin):
     list_display = [
         "name",
         "slug",
-        "price",
-        "available",
         "created",
         "updated",
     ]
     list_filter = [
-        "available",
         "created",
         "updated",
-    ]
-    list_editable = [
-        "price",
-        "available",
     ]
     prepopulated_fields = {
         "slug": ("name",),
     }
+    inlines = [DishCompositionInline]
