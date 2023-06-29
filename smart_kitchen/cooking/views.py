@@ -8,7 +8,7 @@ from .models import Category, Dish
 def menu(request, category_slug=None):
     category = None
     categories = Category.objects.all()
-    dishes_list = Dish.objects.filter(available=True)
+    dishes_list = Dish.objects.all()
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         dishes_list = dishes_list.filter(category=category)
@@ -39,7 +39,7 @@ def dish_detail(request, id, slug):
     # cart_dish_form = CartAddDishForm()
     return render(
         request,
-        "food_order/dish/detail.html",
+        "cooking/detail.html",
         {
             "dish": dish,
         },

@@ -111,12 +111,14 @@
             <span class="fs-5 d-none d-md-inline">Smart Kitchen</span>
           </a>
           <ul class="nav nav-pills flex-column mb-auto">
+            {% if user.is_authenticated %}
             <li class="nav-item">
               <a href="{% url 'account:user_detail' request.user.username %}" class="nav-link active" aria-current="page">
                 <svg class="fs-4 bi pe-none" width="24" height="24"><use xlink:href="#home"/></svg>
                 <text class="ms-1 d-none d-md-inline">Моя страница</text>
               </a>
             </li>
+            {% endif %}
             <li class="nav-item">
               <a href="#" class="nav-link link-body-emphasis">
                 <svg class="fs-4 bi pe-none" width="24" height="24"><use xlink:href="#speedometer2"/></svg>
@@ -168,9 +170,9 @@
               </a>
               <ul class="dropdown-menu text-small shadow">
                 <li><a class="dropdown-item" href="{% url 'account:user_detail' request.user.username %}">Моя страница</a></li>
-                <li><a class="dropdown-item" href="{% url 'account:edit' %}">Настройки</a></li>
+                <li><a class="dropdown-item" href="{% url 'edit' %}">Настройки</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="{% url 'account:logout' %}">Выйти</a></li>
+                <li><a class="dropdown-item" href="{% url 'logout' %}">Выйти</a></li>
               </ul>
             </div>
           {% endif %}

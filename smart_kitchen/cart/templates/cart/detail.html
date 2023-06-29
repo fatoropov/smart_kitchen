@@ -1,6 +1,10 @@
 {% extends "account/base.html" %}
 {% load static %}
 
+{% block title %}
+  Корзина
+{% endblock %}
+
 {% block page_header %}
   <div class="text-center"><h1 class="display-3">Корзина <span class="badge badge-secondary badge-pill">{{ cart.len }}</span></h1></div>
 {% endblock %}
@@ -12,7 +16,7 @@
 
       {% for item in cart %}
         {% with product=item.product %}
-          <div class="col-12 col-sm-12 col-md-6">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
             <div class="card mb-3">
                 <div class="card-body">
                   <div class="row">
@@ -36,17 +40,14 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
                         <div class="row text-center">
-                            <div class="col-sm-4 col-md-2">
+                            <div class="col-sm-6 col-md-4">
                                 <a href="{% url 'cart:cart_update_plus' product.id %}"
                                   class="btn btn-outline-ligth btn-sm">&plus;</a>
                                 {{ item.quantity }}
                                 <a href="{% url 'cart:cart_update_minus' product.id %}"
                                   class="btn btn-outline-ligth btn-sm">&minus;</a>
                             </div>
-                            <div class="col-sm-4 col-md-8">Цена за штуку: {{ item.price }} руб.</div>
-                            <div class="col-sm-4 col-md-2">
-
-                            </div>
+                            <div class="col-sm-6 col-md-8">Цена за штуку: {{ item.price }} руб.</div>
                         </div>
                     </li>
                 </ul>
@@ -55,34 +56,27 @@
         {% endwith %}
       {% endfor %}
     </div>
-    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2" >
-      <div class="col-sm-4 col-md-8"></div>
-      <div class="col-sm-4 col-md-2">
-        <h4  class="float-right">Итого:</h4 >
-      </div>
-      <div class="col-sm-4 col-md-2">
-        <h4 class="float-right">{{ cart.get_total_price}} руб.</h4>
+    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 mb-2 justify-content-end" >
+      <div class="col-sm-8 col-md-8"></div>
+      <div class="col-sm-4 col-md-4">
+        Итого: {{ cart.get_total_price}} руб.
       </div>
     </div>
-    <div class="row">
-      <div class="col-sm-3 col-md-7"></div>
-      <div class="col-sm-4 col-md-2">
-        <a class="btn btn-danger btn-lg float-right" href="{% url 'cart:cart_clear' %}">
+    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 mb-2 justify-content-end">
+      <div class="col-sm-3 col-md-6"></div>
+      <div class="col-sm-9 col-md-6 align-self-rigth">
+        <a class="btn btn-danger float-right mb-2" href="{% url 'cart:cart_clear' %}">
           Очистить корзину
         </a>
         {% if user.is_authenticated %}
-          </div>
-          <div class="col-sm-1 col-md-1"></div>
-          <div class="col-sm-4 col-md-2">
-            <a class="btn btn-success btn-lg float-right" href="{% url 'orders:order_create' %}">
+            <a class="btn btn-success float-right mb-2" href="{% url 'orders:order_create' %}">
                 Перейти к заказу
             </a>
-          </div>
         {% else %}
           </div>
           <div class="col-sm-1 col-md-1"></div>
           <div class="col-sm-4 col-md-2">
-            <a class="btn btn-success btn-lg float-right" href="{% url 'users:login' %}">
+            <a class="btn btn-success btn-lg float-right mb-2" href="{% url 'account:login' %}">
                 Перейти к заказу
             </a>
           </div>
