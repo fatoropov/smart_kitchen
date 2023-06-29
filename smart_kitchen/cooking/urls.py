@@ -6,7 +6,11 @@ app_name = "cooking"
 
 urlpatterns = [
     path(
-        "menu",
+        "menu/",
+        views.menu,
+    ),
+    path(
+        "menu/<slug:menu_slug/",
         views.menu,
         name="menu",
     ),

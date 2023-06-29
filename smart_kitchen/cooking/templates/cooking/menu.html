@@ -1,0 +1,76 @@
+{% extends "account/base.html" %}
+{% load static %}
+
+{% block tittle %}Меню{% endblock %}
+
+{% block page_header %}
+  <div class="text-center"><h1>{% if category %}{{ category.name }}{% else %}Меню{% endif %}</h1></div>
+{% endblock %}
+
+{% block content %}
+  <section id="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-4 col-sm-3 col-md-2">
+          <div class="list-group">
+            <or {% if not category %}class="selected"{% endif %}>
+              <a href="{% url 'cooking:menu' %}" class="list-group-item list-group-item-action">Все</a>
+            </or>
+            {% for cat in categories %}
+              <or {% if category.slug == cat.slug %} class="selected"{% endif %}>
+                <a href="{{ cat.get_absolute_url }}" class="list-group-item list-group-item-action">{{ cat.name }}</a>
+              </or>
+            {% endfor %}
+          </div>
+        </div>
+      
+        <div class="col-8 col-sm-9 col-md-10 ">
+
+          {% if messages %}
+            <div class="col">
+              <ul class="messages">
+                {% for message in messages %}
+                  <li class="{{ message.tags }}">
+                    {{ message|safe }}
+                    <a href="#" class="close">x</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+
+          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
+            {% for dish in dishes %}
+            <div class="col">
+              <div class="card mb-4 box-shadow text-center">
+                <div class="card-header">
+                  <h4 class="my-0 font-weight-normal" style="height: 3rem">{{ dish.name }}</a></h4>
+                </div>
+                  <a href="{{ dish.get_absolute_url }}">
+                    <img class="card-img w-30 h-20"
+                      style="height: 13rem"
+                      src="{% if dish.image %}{{ dish.image.url }}
+                            {% else %}{% static 'img/no_image.png' %}{% endif %}"
+                      alt="">
+                  </a>
+                <div class="card-body">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item text-center">
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          {% include "pagination.html" with page=dishes %}
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+<script src="src/bootstrap-input-spinner.js"></script>
+<script>
+    $("input[type='number']").inputSpinner();
+</script>

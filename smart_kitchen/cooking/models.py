@@ -105,15 +105,16 @@ class DishComposition(models.Model):
         on_delete=models.CASCADE,
     )
     quantity = models.PositiveIntegerField(
-        default=1,
         blank=True,
+        null=True,
     )
     weigth = models.FloatField(
         blank=True,
+        null=True,
     )
     volume = models.PositiveBigIntegerField(
-        default=1000,
         blank=True,
+        null=True,
     )
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

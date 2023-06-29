@@ -35,7 +35,7 @@ def menu(request, category_slug=None):
 
 
 def dish_detail(request, id, slug):
-    dish = get_object_or_404(Dish, id=id, slug=slug, available=True)
+    dish = get_object_or_404(Dish, id=id, slug=slug)
     # cart_dish_form = CartAddDishForm()
     return render(
         request,
