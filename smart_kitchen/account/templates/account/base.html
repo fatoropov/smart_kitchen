@@ -136,11 +136,28 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{% url 'products:product_list' %}" class="nav-link link-body-emphasis">
-                <svg class="fs-4 bi pe-none" width="24" height="24"><use xlink:href="#people-circle"/></svg>
-                <span class="ms-1 d-none d-md-inline">Заказать продукты</span>
-              </a>
+              <div class="dropdown mb-3">
+                <a href="{% url 'products:product_list' %}" class="nav-link link-body-emphasis dropdown-toggle d-md-inline-dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  <svg class="fs-4 bi pe-none" width="24" height="24"><use xlink:href="#people-circle"/></svg>
+                  <span class="ms-1 d-none d-md-inline">Продукты</span>
+                </a>
+                <ul class="dropdown-menu text-small shadow">
+                  <li><a class="dropdown-item" href="{% url 'products:product_list' %}">Заказать</a></li>
+                  <li><a class="dropdown-item" href="{% url 'orders:orders_history' %}">История заказов</a></li>
+                </ul>
+              </div>
             </li>
+            {% with total_items=cart|length %}
+            {% if total_items > 0 %}
+              <li class="nav-item d-none d-md-block ml-auto">
+                <a class="nav-link" href="{% url 'cart:cart_detail' %}">
+                  <i class="bi bi-basket btn btn-outline-primary mr-sm-2 mr-md-0 mt-md-0" href="{% url 'cart:cart_detail' %}">
+                    {{ cart.get_total_price }} руб.
+                  </i>
+                </a>
+              </li>
+            {% endif %}
+            {% endwith %}
           </ul>
           {% if user.is_authenticated %}
             <hr>

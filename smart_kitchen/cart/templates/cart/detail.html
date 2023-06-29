@@ -18,10 +18,11 @@
                   <div class="row">
                     <div class="col-md-3 col-sm-5">
                       <a href="{{ product.get_absolute_url }}">
-                          <img class="card-img-top w-30 h-40"
-                              src="{% if product.image %}{{ product.image.url }}
-                                    {% else %}{% static 'img/no_image.png' %}{% endif %}"
-                              alt="">
+                        <img class="card-img-top w-30 h-40"
+                             src="{% if product.image %}{{ product.image.url }}
+                                  {% else %}{% static 'img/no_image.png' %}{% endif %}"
+                             alt=""
+                        >
                       </a>
                     </div>
                     <div class="col-md-9 col-sm-7">
@@ -33,14 +34,14 @@
                   </div>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item bg-light">
+                    <li class="list-group-item">
                         <div class="row text-center">
                             <div class="col-sm-4 col-md-2">
                                 <a href="{% url 'cart:cart_update_plus' product.id %}"
-                                  class="btn btn-outline-dark btn-sm">&plus;</a>
+                                  class="btn btn-outline-ligth btn-sm">&plus;</a>
                                 {{ item.quantity }}
                                 <a href="{% url 'cart:cart_update_minus' product.id %}"
-                                  class="btn btn-outline-dark btn-sm">&minus;</a>
+                                  class="btn btn-outline-ligth btn-sm">&minus;</a>
                             </div>
                             <div class="col-sm-4 col-md-8">Цена за штуку: {{ item.price }} руб.</div>
                             <div class="col-sm-4 col-md-2">
@@ -62,7 +63,6 @@
       <div class="col-sm-4 col-md-2">
         <h4 class="float-right">{{ cart.get_total_price}} руб.</h4>
       </div>
-
     </div>
     <div class="row">
       <div class="col-sm-3 col-md-7"></div>
@@ -73,12 +73,16 @@
         {% if user.is_authenticated %}
           </div>
           <div class="col-sm-1 col-md-1"></div>
-
+          <div class="col-sm-4 col-md-2">
+            <a class="btn btn-success btn-lg float-right" href="{% url 'orders:order_create' %}">
+                Перейти к заказу
+            </a>
+          </div>
         {% else %}
           </div>
           <div class="col-sm-1 col-md-1"></div>
           <div class="col-sm-4 col-md-2">
-            <a class="btn btn-success btn-lg float-right" href="{% url 'account:login' %}">
+            <a class="btn btn-success btn-lg float-right" href="{% url 'users:login' %}">
                 Перейти к заказу
             </a>
           </div>

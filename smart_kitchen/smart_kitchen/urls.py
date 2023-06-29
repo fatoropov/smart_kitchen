@@ -21,6 +21,10 @@ urlpatterns = [
         include("products.urls", namespace="products"),
     ),
     path(
+        "orders/",
+        include("orders.urls", namespace="orders"),
+    ),
+    path(
         "cooking/",
         include("cooking.urls"),
     ),

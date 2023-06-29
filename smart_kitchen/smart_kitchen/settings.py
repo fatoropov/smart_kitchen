@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     "dinnerware.apps.DinnerwareConfig",
     "cooking.apps.CookingConfig",
     "cart.apps.CartConfig",
+    "orders.apps.OrdersConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -95,7 +96,8 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation." + "UserAttributeSimilarityValidator",
+        "NAME": "django.contrib.auth.password_validation."
+        + "UserAttributeSimilarityValidator",
     },
     {
         "NAME": "django.contrib.auth.password_validation." + "MinimumLengthValidator",
@@ -112,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "ru-RU"
 
 TIME_ZONE = "Asia/Yekaterinburg"
 
@@ -172,7 +174,9 @@ EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-ABSOLUTE_URL_OVERRIDES = {"auth.user": lambda u: reverse_lazy("account:user_detail", args=[u.username])}
+ABSOLUTE_URL_OVERRIDES = {
+    "auth.user": lambda u: reverse_lazy("account:user_detail", args=[u.username])
+}
 
 # Создать корзину в сессии
 CART_SESSION_ID = "cart"
