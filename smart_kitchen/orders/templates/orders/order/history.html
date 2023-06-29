@@ -1,0 +1,65 @@
+{% extends "account/base.html" %}
+{% load static %}
+{{ form.media }}
+
+{% block page_header %}
+  <div class="text-center"><h1>Мои заказы</h1></div>
+{% endblock %}
+
+{% block content %}
+  {% if orders %}
+  <div class="row mr-auto">
+    <div class="col-md-1 col-lg-2"></div>
+    <div class=" col-12 col-sm-12 col-md-10 col-lg-8">
+      <table class="table table-striped shoplist">
+        <thead class="shopunit" >
+          <tr>
+            <th class="primary">
+              <h6 class="text-center">Номер заказа</h6>
+            </th>
+            <th class="primary">
+              <h6 class="text-center">Дата доставки</h6>
+            </th>
+            <th class="primary">
+              <h6 class="text-center">Состав</h6>
+            </th>
+            <th class="primary">
+              <h6 class="text-center">Сумма</h6>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in orders %}
+            <tr>
+              <td>
+                <h6 class="text-center">{{ order.id }}</h6>
+              </td>
+              <td>
+                <h6 class="text-center">{{ order.date }}</h6>
+              </td>
+              <td>
+                {% for products in order.products %}
+                  <h6 class="text-center">{{ products }}</h6>
+                {% endfor %}
+              </td>
+              <td>
+                <h6 class="text-center">{{ order.price }} ₽</h6>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% include "pagination.html" with page=orders %}
+      <p class="text-right">
+        <a  href="{% url 'products:product_list' %}" class="btn btn-outline-primary">Продолжить покупки</a>
+      </p>
+    </div>
+    <div class="col-md-1 col-lg-2"></div>
+  </div>
+  {% else %}
+  <h4 class="mt-3 mb-3 text-center">
+    История пуста
+  </h4>
+  {% endif %}
+
+{% endblock %}
